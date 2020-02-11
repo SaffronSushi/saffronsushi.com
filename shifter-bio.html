@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Saffron Sushi | Shifter</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='icon' href='images/sushi-icon.ico'>
+        <link rel='stylesheet' href='main-style.css'>
+    </head>
+    <body>
+
+        <p><a href='index.html'>&lt;-- Back to home.</a></p>
+        <img src='' alt='Screenshot from the game.'>
+        <h1>SHIFTER</h1>
+        <p>
+            Initially written in Python, this is a remake of one of the first games I ever made.  
+            It was created when I wanted to see what would happen if different color values of the 
+            game's elements were effected by the player's position, using different axis.
+        </p>
+        <a href='#' id='play-button'>Click to play</a>
+        <p>Keep reading to see how the game was made, or <a href='#'>see my devlog</a>.</p>
+
+        <h2>How "shifting" is done</h2>
+        <p>
+            Each object in the game has its own color property in the form of a string, in this case "rgba()".
+        </p>
+        <p>
+            The <strong>Shifter()</strong> object is responsible for dividing this string into useable values to be manipulated, 
+            bringing those values back together into a string format (as used by Canvas API), and (most importantly) changing 
+            given color values based on the position (within a specified axis) of a given object.  It is modular enough to 
+            be used on any object with position and color values, for example: the player object can be used to manipulate 
+            itself as well.
+        </p>
+        <img src='' alt='Screenshot of Shifter() code.'>
+
+        <h2>Parsing levels</h2>
+        <p>
+            All levels are parsed from JSON files, using an XMLHttpRequest().  
+            These files include the basic settings for each game object, including layout as well as how the their color 
+            properties will be handled.
+        </p>
+        <p>
+            The layout of these objects are specified using separate arrays, where different characters represent their 
+            x and y coordinates.
+        </p>
+        <img src='' alt='Screenshot of array showing the player&apos;s position.'>
+        <p>
+            The walls in particular have wide range of possible symbols.  For walls that don't change color, these are 
+            used to specify the brightness of a given hue (red, green, blue, and alpha values each have their own arrays).  
+            For walls that change color, these specify which axis to base their changes on, and which direction the 
+            player moves to increase brightness.
+        </p>
+        <figure>
+            <img src='' alt='Screenshot of array showing wall layout.'>
+            <figcaption>
+                Numbers, and letters from "a" to "f" represent walls.  
+                <br>"x", "y", and "z" represent walls that change color in-game 
+                (capitalization is also relevant).
+            </figcaption>
+        </figure>
+
+        <h2>Player movement and collision</h2>
+        <p>
+            Player movement relies on movement flags based on key inputs.  Event listeners are used to change these flags.
+        </p>
+        <p>
+            In the Player "update()" function, negative movement (like moving left) is subtracted from positive movement, 
+            and multiplied by a "speed" property.
+        </p>
+        <p>
+            Within the "update()" function, all walls are cycled through and are checked for collision.  If a collision 
+            occurs, the player will be sent back to the wall's border.  
+        </p>
+        <p>
+            <strong>Move assist:</strong>
+            <br>If the player pushes against a wall <i>and</i> 
+            is positioned over a corner, the player will be moved away from the wall to position it so it is free to 
+            move past the wall.
+        </p>
+        <img src='' alt='A gif of the player bypassing a corner using move assist.'>
+        
+    </body>
+</html>
