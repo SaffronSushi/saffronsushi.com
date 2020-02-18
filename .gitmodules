@@ -3,7 +3,7 @@
 	url = git@github.com:SaffronSushi/restaurant-demo-1
 [submodule "portfolio-projects/web-shifter"]
 	path = portfolio-projects/web-shifter
-	url = git@github.com:SaffronSushi/web-shifter
+	url = https://github.com/SaffronSushi/web-shifter
 [submodule "portfolio-projects/dynamic-shapes-page"]
 	path = portfolio-projects/dynamic-shapes-page
 	url = git@github.com:SaffronSushi/dynamic-shapes-page
