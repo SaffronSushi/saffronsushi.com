@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    color: #300;
+    overflow: hidden;
+}
+
+header {
+    position: absolute;
+    left: 30px;
+}
+
+h1 {
+    font-size: 6rem;
+    color: rgba(0,0,0,0.5);
+}
+
+
+h2 {
+    font-size: 2rem;
+    color: rgba(0,0,0,0.5);
+}
+
+canvas {
+    width: 512px;
+    height: 512px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    background: rgba(0,0,0,0.2);
+}
