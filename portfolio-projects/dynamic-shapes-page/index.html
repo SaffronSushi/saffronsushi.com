@@ -1,0 +1,349 @@
+<!--    TODO
+    when changing screen, keep custom shape positions
+
+    set points for circle,
+    create drawDot() function instead for others
+-->
+
+<!DOCTYPE html>
+<html lang='en-US'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Dynamic shape test</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <style>
+            html {
+                font-size: 10px;
+                font-family: sans-serif;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                color: #000;
+            }
+
+            #canvas {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                background: #666;
+                text-align: center;
+                font-size: 2rem;
+            }
+
+            #key-tutor {
+                position: absolute;
+                margin-top: 5px;
+                left: 100px;
+                background: none;
+                font-size: 2rem;
+                color: #bbb;
+            }
+
+            #menu {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 10px;
+
+                background: #ffffff88;
+            }
+            
+            #menu ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            #menu button {
+                width: 100%;
+                margin-bottom: 10%;
+                padding: 10px;
+                font-weight: 600;
+            }
+
+            #menu label {
+                margin: 0;
+                padding: 5px;
+                background: #ddd;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() 
+            {
+                const squareBtn = document.querySelector('#square-btn');
+                const triBtn = document.querySelector('#tri-btn');
+                const circleBtn = document.querySelector('#circle-btn');
+                const canvas = document.querySelector('#canvas');
+                const ctx = canvas.getContext('2d');
+                const gridCheck = document.querySelector('#gridcheck');
+                var showGrid = gridCheck.checked;
+                const CanCenter = {x:0, y:0};
+
+                var canWidth;
+                var canHeight;
+                var tileCountV;
+                var tileCountH;
+                var canCenter; // canvas center, aligned w/ tiles
+                var TS = 16 // tile size
+
+                var activeShape = 'square';
+                var activePoint = 0;
+
+                const Shapes = {
+                    square: {
+                        points: [
+                            {x:0, y:0},
+                            {x:0, y:0},
+                            {x:0, y:0},
+                            {x:0, y:0}
+                        ]
+                    },
+                    triangle: {
+                        points: [
+                            {x:0, y:0},
+                            {x:0, y:0},
+                            {x:0, y:0}
+                        ]
+                    },
+                    circle: {
+                        center: {x:0, y:0},
+                        radius: 0
+                    }
+                }
+
+                function setCanSize() 
+                {
+                    // calculates grid points
+                    canWidth = canvas.width = window.innerWidth;
+                    canHeight = canvas.height = window.innerHeight;
+                    tileCountV = canWidth / TS;
+                    tileCountH = canHeight / TS;
+                    CanCenter.x = (tileCountV*TS)/2;
+                    CanCenter.y = (tileCountH*TS)/2;
+                    // Square
+                    // topleft
+                    Shapes.square.points[0].x = CanCenter.x - TS*4;
+                    Shapes.square.points[0].y = CanCenter.y - TS*4;
+                    // topright
+                    Shapes.square.points[1].x = CanCenter.x + TS*4;
+                    Shapes.square.points[1].y = CanCenter.y - TS*4;
+                    // bottomright
+                    Shapes.square.points[2].x = CanCenter.x + TS*4;
+                    Shapes.square.points[2].y = CanCenter.y + TS*4;
+                    // bottomleft
+                    Shapes.square.points[3].x = CanCenter.x - TS*4;
+                    Shapes.square.points[3].y = CanCenter.y + TS*4;
+                    // Triangle
+                    // top
+                    Shapes.triangle.points[0].x = CanCenter.x;
+                    Shapes.triangle.points[0].y = CanCenter.y - TS*4;
+                    // right
+                    Shapes.triangle.points[1].x = CanCenter.x + TS*4;
+                    Shapes.triangle.points[1].y = CanCenter.y + TS*4;
+                    // left
+                    Shapes.triangle.points[2].x = CanCenter.x - TS*4;
+                    Shapes.triangle.points[2].y = CanCenter.y + TS*4;
+                    // Circle
+                    Shapes.circle.center.x = CanCenter.x;
+                    Shapes.circle.center.y = CanCenter.y;
+                    Shapes.circle.radius = TS*4;
+                }
+
+                function draw() 
+                {
+                    // background is set in CSS
+                    // clear screen
+                    ctx.clearRect(0, 0, canWidth, canHeight);
+                    // draw grid
+                    if (showGrid) 
+                    { // change to gridCheck.checked
+                        ctx.lineWidth = 2;
+                        ctx.strokeStyle = '#999';
+                        for (var i = 0; i < tileCountV; i++) {
+                            ctx.beginPath();
+                            ctx.moveTo(TS*i, 0);
+                            ctx.lineTo(TS*i, canHeight);
+                            ctx.stroke();
+                        }
+                        for (var i = 0; i < tileCountH; i++) {
+                            ctx.beginPath();
+                            ctx.moveTo(0, TS*i);
+                            ctx.lineTo(canWidth, TS*i);
+                            ctx.stroke();
+                        }
+                    }
+                    
+                    // draw active shape
+                    switch (activeShape) 
+                    {
+                        case 'square':
+                            drawPoly(activeShape, '#f00', '#faa');
+                            break;
+                        case 'triangle':
+                            drawPoly(activeShape, '#f00', '#faa');
+                            break;
+                        case 'circle':
+                            drawCircle(Shapes[activeShape].center,
+                                Shapes[activeShape].radius, '#f00', '#faa');
+                    }
+                }
+
+                function degToRad(degrees) 
+                {
+                    return degrees * Math.PI / 180;
+                }
+
+                function drawPoly(shape, color, strokeClr) 
+                {
+                    ctx.fillStyle = color;
+                    // draw shape
+                    ctx.beginPath();
+                    ctx.moveTo(Shapes[shape].points[0].x, 
+                        Shapes[shape].points[0].y);
+                    for (var i=1; i<Shapes[shape].points.length; i++) 
+                    { // make sure to set i to 1!
+                        ctx.lineTo(Shapes[shape].points[i].x, 
+                                Shapes[shape].points[i].y);
+                    }
+                    ctx.lineTo(Shapes[shape].points[0].x, 
+                            Shapes[shape].points[0].y);
+                    ctx.fill();
+                    // draw outline
+                    ctx.strokeStyle = strokeClr;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(Shapes[shape].points[0].x, 
+                            Shapes[shape].points[0].y);
+                    for (var i=1; i<Shapes[shape].points.length; i++) 
+                    {
+                        ctx.lineTo(Shapes[shape].points[i].x, 
+                            Shapes[shape].points[i].y);
+                    }
+                    ctx.lineTo(Shapes[shape].points[0].x, 
+                        Shapes[shape].points[0].y);
+                    ctx.stroke();
+                    // draw points
+                    ctx.beginPath();
+                    for (var i=0; i<Shapes[shape].points.length; i++)
+                    {  
+                        if (activePoint === i) {
+                            drawCircle(Shapes[shape].points[i], TS/2, '#fff');
+                        } else {
+                            drawCircle(Shapes[shape].points[i], TS/2,
+                                        ctx.strokeStyle);
+                        }
+
+                    }
+                }
+
+                function drawCircle(position, radius, color, strokeClr)
+                {
+                    ctx.fillStyle = color;
+                    // draw shape
+                    ctx.beginPath();
+                    ctx.arc(position.x, position.y, radius, 
+                                degToRad(0), degToRad(360));
+                    ctx.fill();
+                    // draw outline
+                    ctx.strokeStyle = strokeClr;
+                    ctx.beginPath();
+                    ctx.arc(position.x, position.y, radius, 
+                                degToRad(0), degToRad(360));
+                    ctx.stroke();
+                }
+
+                gridCheck.onclick = function()
+                {
+                    showGrid = gridCheck.checked;
+                }
+
+                squareBtn.onclick = function()
+                {
+                    activeShape = 'square';
+                }
+
+                triBtn.onclick = function()
+                {
+                    activeShape = 'triangle';
+                }
+
+                circleBtn.onclick = function()
+                {
+                    activeShape = 'circle';
+                }
+
+                onmousedown = function()
+                {
+                    if (activeShape !== 'circle') {
+                        Shapes[activeShape].points[activePoint].x = event.clientX;
+                        Shapes[activeShape].points[activePoint].y = event.clientY;
+                    } else {
+                        Shapes[activeShape].center.x = event.clientX;
+                        Shapes[activeShape].center.y = event.clientY;
+                    }
+
+                }
+
+                onkeydown = function()
+                {
+                    switch (event.code)
+                    {
+                        case 'Digit1':
+                            activePoint = 0;
+                            break;
+                        case 'Digit2':
+                            activePoint = 1;
+                            break;
+                        case 'Digit3':
+                            if (activeShape !== 'cricle') {
+                                activePoint = 2;
+                            }
+                            break;
+                        case 'Digit4':
+                            if (activeShape === 'square') {
+                                activePoint = 3;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                window.onresize = function()
+                {
+                    setCanSize();
+                }
+
+                setCanSize();
+                setInterval(onTimerTick, 30);
+                function onTimerTick() {
+                    draw();
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id='canvas' width='512px' height='256px'>
+            <h2>Canvas failed to load.</h2>
+        </canvas>
+        <p id='key-tutor'>Toggle points with number keys 1-4</p>
+        <div id='menu'>
+            <ul>
+                <li><button id='square-btn'>Square</button></li>
+                <li><button id='tri-btn'>Triangle</button></li>
+                <li><button id='circle-btn'>Circle</button></li>
+                <li>
+                    <label for='checkbox'>Grid</label>
+                    <input type='checkbox' name='gridcheck' id='gridcheck'>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
