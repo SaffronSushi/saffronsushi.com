@@ -120,6 +120,11 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'ArrowUp' || 'up':
                 upPressed = false;
                 break;
+                            
+            // Add restart condition
+            case 'r':
+                changeLevel(levelNum);
+                break;
             default:
                 break;
         }
