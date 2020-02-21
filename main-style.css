@@ -6,6 +6,11 @@ figure {
     margin-left: 0;
 }
 
+#social-media-link {
+    font-size: 0.8rem;
+    color: #000c;
+}
+
 /*
 figure {
     background: #0002;
