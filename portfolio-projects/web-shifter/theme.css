@@ -17,6 +17,10 @@ header {
     left: 30px;
 }
 
+a {
+    font-size: 2rem;
+}
+
 h1 {
     font-size: 6rem;
     color: rgba(0,0,0,0.5);
