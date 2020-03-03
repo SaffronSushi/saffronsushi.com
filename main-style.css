@@ -11,7 +11,19 @@ figure {
     color: #000c;
 }
 
+.play-button {
+    padding: 4px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: #0003
+}
+
 /*
+
+#selfie {
+    float: right;
+}
+
 figure {
     background: #0002;
     display: inline-block;

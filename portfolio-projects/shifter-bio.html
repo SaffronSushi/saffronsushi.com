@@ -5,21 +5,21 @@
 -->
 
 <!DOCTYPE html>
-<html lang='en-US'>
+<html lang="en-US">
     <head>
-        <meta charset='utf-8'>
+        <meta charset="utf-8">
         <title>Saffron Sushi | Shifter</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <link rel='icon' href='../images/sushi-icon.ico'>
-        <link rel='stylesheet' href='../main-style.css'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../images/sushi-icon.ico">
+        <link rel="stylesheet" href="../main-style.css">
     </head>
     <body>
 
-        <p><a href='../index.html'>&lt;-- Back to home.</a></p>
+        <p><a href="../index.html">&lt;-- Back to home.</a></p>
         <figure>
-            <img src='../images/shifter-images/old-logo.png' 
-                alt='Screenshot from the game.'
-                width='256' height='256'>
+            <img src="../images/shifter-images/old-logo.png" 
+                alt="Screenshot from the game."
+                width="256" height="256">
             <figcaption>
                 An image from the original game.
             </figcaption>
@@ -30,7 +30,8 @@
             It was created when I wanted to see what would happen if different color values of the 
             game's elements were effected by the player's position, using different axis.
         </p>
-        <a href='web-shifter/web-shifter.html' id='play-button'>Click to play</a>
+
+        <a href="web-shifter/web-shifter.html" class="play-button">Click to play</a>
         <p>Keep reading to see how the game was made.</p>
 
         <h2>How "shifting" is done</h2>
@@ -45,12 +46,12 @@
             itself as well.
         </p>
         <figure>
-            <img src='../images/shifter-images/player-alpha-code.png' alt='Screenshot of Shifter() code.'
-            width='512' height='76'>
+            <img src="../images/shifter-images/player-alpha-code.png" alt="Screenshot of Shifter() code."
+            width="512" height="76">
         </figure>
         <figure>
-            <img src='../images/shifter-images/player-alpha-gif.gif' alt='A gif of result.'
-                width='512'>
+            <img src="../images/shifter-images/player-alpha-gif.gif" alt="A gif of result."
+                width="512">
             <figcaption>
                 Here, movement on the X axis changes the player's transparency.
             </figcaption>
@@ -66,9 +67,9 @@
             The layout of these objects are specified using separate arrays, where different characters represent their 
             x and y coordinates.
         </p>
-        <img src='../images/shifter-images/player-layout.png' 
-            alt='Screenshot of array showing the player&apos;s position.'
-            width='256'>
+        <img src="../images/shifter-images/player-layout.png" 
+            alt="Screenshot of array showing the player&apos;s position."
+            width="256">
         <p>
             The walls in particular have wide range of possible symbols.  For walls that don't change color, these are 
             used to specify the brightness of a given hue (red, green, blue, and alpha values each have their own arrays).  
@@ -76,12 +77,12 @@
             player moves to increase brightness.
         </p>
         <figure>
-            <img src='../images/shifter-images/wall-layout_256.png' 
-                alt='Screenshot of array showing wall layout.'
-                width='256' height='349'>
-            <img src='../images/shifter-images/wall-layout-2_256.png' 
-                alt='Another of array showing wall layout.'
-                width='256' height='349'>
+            <img src="../images/shifter-images/wall-layout_256.png" 
+                alt="Screenshot of array showing wall layout."
+                width="256" height="349">
+            <img src="../images/shifter-images/wall-layout-2_256.png" 
+                alt="Another of array showing wall layout."
+                width="256" height="349">
             <figcaption>
                 Numbers, and letters from "a" to "f" represent walls.  
                 <br>"x", "y", and "z" represent walls that change color in-game 
@@ -107,9 +108,9 @@
             is positioned over a corner, the player will be moved away from the wall to position it so it is free to 
             move past the wall.
         </p>
-        <img src='../images/shifter-images/move-assist-vid.gif' 
-            alt='A gif of the player bypassing a corner using move assist.'
-            width='512'>
+        <img src="../images/shifter-images/move-assist-vid.gif" 
+            alt="A gif of the player bypassing a corner using move assist."
+            width="512">
         
     </body>
 </html>
