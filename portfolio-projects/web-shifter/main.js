@@ -1,11 +1,3 @@
-// ADD RESET LEVEL BUTTON
-
-// Only allow arrow movement when canvas is in focus
-
-// Remove static/dynamic arrays from JSON files
-// keep only 1 array for each color wall
-// keep both dynamic and static symbols on same arrays
-
 document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize canvas
