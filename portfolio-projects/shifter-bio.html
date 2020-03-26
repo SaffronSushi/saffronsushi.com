@@ -15,102 +15,105 @@
     </head>
     <body>
 
-        <p><a href="../index.html">&lt;-- Back to home.</a></p>
-        <figure>
-            <img src="../images/shifter-images/old-logo.png" 
-                alt="Screenshot from the game."
-                width="256" height="256">
-            <figcaption>
-                An image from the original game.
-            </figcaption>
-        </figure>
-        <h1>SHIFTER</h1>
-        <p>
-            Initially written in Python, this is a remake of one of the first games I ever made.  
-            It was created when I wanted to see what would happen if different color values of the 
-            game's elements were effected by the player's position, using different axis.
-        </p>
-
-        <a href="web-shifter/web-shifter.html" class="play-button">Click to play</a>
-        <p>Keep reading to see how the game was made.</p>
-
-        <h2>How "shifting" is done</h2>
-        <p>
-            Each object in the game has its own color property in the form of a string, in this case "rgba()".
-        </p>
-        <p>
-            The <strong>Shifter()</strong> object is responsible for dividing this string into useable values to be manipulated, 
-            bringing those values back together into a string format (as used by Canvas API), and (most importantly) changing 
-            given color values based on the position (within a specified axis) of a given object.  It is modular enough to 
-            be used on any object with position and color values, for example: the player object can be used to manipulate 
-            itself as well.
-        </p>
-        <figure>
-            <img src="../images/shifter-images/player-alpha-code.png" alt="Screenshot of Shifter() code."
-            width="512" height="76">
-        </figure>
-        <figure>
-            <img src="../images/shifter-images/player-alpha-gif.gif" alt="A gif of result."
-                width="512">
-            <figcaption>
-                Here, movement on the X axis changes the player's transparency.
-            </figcaption>
-        </figure>
-
-        <h2>Parsing levels</h2>
-        <p>
-            All levels are parsed from JSON files, using an XMLHttpRequest().  
-            These files include the basic settings for each game object, including layout as well as how the their color 
-            properties will be handled.
-        </p>
-        <p>
-            The layout of these objects are specified using separate arrays, where different characters represent their 
-            x and y coordinates.
-        </p>
-        <img src="../images/shifter-images/player-layout.png" 
-            alt="Screenshot of array showing the player&apos;s position."
-            width="256">
-        <p>
-            The walls in particular have wide range of possible symbols.  For walls that don't change color, these are 
-            used to specify the brightness of a given hue (red, green, blue, and alpha values each have their own arrays).  
-            For walls that change color, these specify which axis to base their changes on, and which direction the 
-            player moves to increase brightness.
-        </p>
-        <figure>
-            <img src="../images/shifter-images/wall-layout_256.png" 
-                alt="Screenshot of array showing wall layout."
-                width="256" height="349">
-            <img src="../images/shifter-images/wall-layout-2_256.png" 
-                alt="Another of array showing wall layout."
-                width="256" height="349">
-            <figcaption>
-                Numbers, and letters from "a" to "f" represent walls.  
-                <br>"x", "y", and "z" represent walls that change color in-game 
-                (capitalization is also relevant).
-            </figcaption>
-        </figure>
-
-        <h2>Player movement and collision</h2>
-        <p>
-            Player movement relies on movement flags based on key inputs.  Event listeners are used to change these flags.
-        </p>
-        <p>
-            In the Player "update()" function, negative movement (like moving left) is subtracted from positive movement, 
-            and multiplied by a "speed" property.
-        </p>
-        <p>
-            Within the "update()" function, all walls are cycled through and are checked for collision.  If a collision 
-            occurs, the player will be sent back to the wall's border.  
-        </p>
-        <p>
-            <strong>Move assist:</strong>
-            <br>If the player pushes against a wall <i>and</i> 
-            is positioned over a corner, the player will be moved away from the wall to position it so it is free to 
-            move past the wall.
-        </p>
-        <img src="../images/shifter-images/move-assist-vid.gif" 
-            alt="A gif of the player bypassing a corner using move assist."
-            width="512">
+        <p><a href="../index.html" class="home-link">&lt;-- Back to home</a></p>
+        <img src="../images/shifter-images/old-logo.png" 
+            alt="Screenshot from the game."
+            width="256" height="256"
+            class="portfolio-img">
+        <main>
+            <section>
+                <h1>SHIFTER</h1>
+                <p>
+                    Initially written in Python, this is a remake of one of the first games I ever made.  
+                    It was created when I wanted to see what would happen if different color values of the 
+                    game's elements were effected by the player's position, using different axis.
+                </p>
         
+                <a href="web-shifter/web-shifter.html" class="play-button">Click to play</a>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>How "shifting" is done</h2>
+                <p>
+                    Each object in the game has its own color property in the form of a string, in this case "rgba()".
+                </p>
+                <p>
+                    The <strong>Shifter()</strong> object is responsible for dividing this string into useable values to be manipulated, 
+                    bringing those values back together into a string format (as used by Canvas API), and (most importantly) changing 
+                    given color values based on the position (within a specified axis) of a given object.  It is modular enough to 
+                    be used on any object with position and color values, for example: the player object can be used to manipulate 
+                    itself as well.
+                </p>
+                <figure>
+                    <img src="../images/shifter-images/player-alpha-code.png" alt="Screenshot of Shifter() code."
+                    width="512" height="76">
+                </figure>
+                <figure>
+                    <img src="../images/shifter-images/player-alpha-gif.gif" alt="A gif of result."
+                        width="512">
+                    <figcaption>
+                        Here, movement on the X axis changes the player's transparency.
+                    </figcaption>
+                </figure>
+        
+                <h2>Parsing levels</h2>
+                <p>
+                    All levels are parsed from JSON files, using an XMLHttpRequest().  
+                    These files include the basic settings for each game object, including layout as well as how the their color 
+                    properties will be handled.
+                </p>
+                <p>
+                    The layout of these objects are specified using separate arrays, where different characters represent their 
+                    x and y coordinates.
+                </p>
+                <img src="../images/shifter-images/player-layout.png" 
+                    alt="Screenshot of array showing the player&apos;s position."
+                    width="256">
+                <p>
+                    The walls in particular have wide range of possible symbols.  For walls that don't change color, these are 
+                    used to specify the brightness of a given hue (red, green, blue, and alpha values each have their own arrays).  
+                    For walls that change color, these specify which axis to base their changes on, and which direction the 
+                    player moves to increase brightness.
+                </p>
+                <figure>
+                    <img src="../images/shifter-images/wall-layout_256.png" 
+                        alt="Screenshot of array showing wall layout."
+                        width="256" height="349">
+                    <img src="../images/shifter-images/wall-layout-2_256.png" 
+                        alt="Another of array showing wall layout."
+                        width="256" height="349">
+                    <figcaption>
+                        Numbers, and letters from "a" to "f" represent walls.  
+                        <br>"x", "y", and "z" represent walls that change color in-game 
+                        (capitalization is also relevant).
+                    </figcaption>
+                </figure>
+        
+                <h2>Player movement and collision</h2>
+                <p>
+                    Player movement relies on movement flags based on key inputs.  Event listeners are used to change these flags.
+                </p>
+                <p>
+                    In the Player "update()" function, negative movement (like moving left) is subtracted from positive movement, 
+                    and multiplied by a "speed" property.
+                </p>
+                <p>
+                    Within the "update()" function, all walls are cycled through and are checked for collision.  If a collision 
+                    occurs, the player will be sent back to the wall's border.  
+                </p>
+                <p>
+                    <strong>Move assist:</strong>
+                    <br>If the player pushes against a wall <i>and</i> 
+                    is positioned over a corner, the player will be moved away from the wall to position it so it is free to 
+                    move past the wall.
+                </p>
+                <img src="../images/shifter-images/move-assist-vid.gif" 
+                    alt="A gif of the player bypassing a corner using move assist."
+                    width="512">
+                
+            </section>
+        </main>
     </body>
 </html>

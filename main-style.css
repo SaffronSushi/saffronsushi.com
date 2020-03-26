@@ -2,43 +2,140 @@ html {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+body {
+    background-color: #2a3946;
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+p {
+    line-height: 1.3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+a {
+    color: #9b3535;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-shadow: #4007 4px 4px 4px;
+}
+
+hr {
+    border: 2px solid #222;
+}
+
+img {
+    box-shadow: #333 4px 4px 6px;
+}
+
+li {
+    list-style-type: square;
+}
+
+header {
+    background-color: #f1ebe3;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+}
+
+#selfie {
+    border-radius: 16px;
+    width: 30%;
+    height: 100%;
+}
+
+header button {
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 6px;
+}
+
+header button:hover, header button:focus {
+    background-color: #fff;
+    color: #333;
+    outline: none;
+}
+
+#bio {
+    background-color: #fff;
+    box-shadow: #333 2px 2px 6px;
+    margin: 0 10px;
+    padding: 2px 10px;
+    border-radius: 0 10px 10px 10px;
+}
+
+main {
+    background-color: #f1ebe3;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 0 10px 10px 10px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.home-link {
+    color: #fff;
+}
+
+.portfolio-img {
+    margin: 20px;
+}
+
+.contact a {
+    font-size: 16px;
+}
+
 figure {
     margin-left: 0;
 }
 
 #social-media-link {
     font-size: 0.8rem;
-    color: rgba(0, 0, 0, 0.8);
 }
 
 .play-button {
-    padding: 4px;
+    background-color: #fff;
+    color: #000;
     font-weight: 600;
+    box-shadow: #333 2px 2px 4px;
     border-radius: 4px;
-    background: rgba(0, 0, 0, 0.4);
+    padding: 4px;
 }
 
-/*
-
-#selfie {
-    float: right;
+.play-button:hover{
+    background-color: #333;
+    color: #fff;
 }
 
-figure {
-    background: #0002;
-    display: inline-block;
-    padding: 10px;
-    width: 300px;
-}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    p {
+        font-size: 1.2em;
+    }
 
-figure img {
-    display: block;
-    margin: auto;
-    width: 100%;
+    section img {
+        width: 90%;
+    }
 }
-
-figcaption {
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-*/
