@@ -150,6 +150,10 @@ article#main-col {
     width: 65%;
 }
 
+article#main-col .page-title {
+    font-size: 20px;
+}
+
 /* Sidebar */
 aside#sidebar {
     float: right;
@@ -197,6 +201,7 @@ footer li a:hover {
 }
 
 @media(max-width: 768px) {
+    header .container,
     header #branding,
     header nav,
     header li,
@@ -232,7 +237,16 @@ footer li a:hover {
     .contact input, .contact textarea {
         width: 100%;
         margin-bottom: 5px;
-    }   
+    }
+
+    #boxes .container {
+        width: 70%;
+    }
+
+    #boxes .box {
+        margin: 30px 0 30px 0;
+        padding: 0;
+    }
 }
 
 @media(max-width: 600px) {
