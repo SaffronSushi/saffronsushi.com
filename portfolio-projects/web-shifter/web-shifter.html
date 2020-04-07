@@ -4,23 +4,34 @@
         <meta charset='utf-8'>
         <title>Shifter</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <link rel='stylesheet' type='text/css' href='theme.css'>
+        <link rel='stylesheet' type='text/css' href='style.css'>
         
         <!-- DOMContentLoaded listner also used. 'defer' used just in case -->
         <script src='main.js' defer></script>
     </head>
     <body>
+        
         <header>
-            <h1>SHIFTER</h1>
-            <h2>
-                Use arrow keys to move
-                <br>Press R to restart level
-            </h2>
-            <!--hyperlink only works when used with saffronsushi.com-->
-            <a href='../shifter-bio'>Back to bio</a>
+            <div class="branding">
+                <!--link only works when used with saffronsushi.com-->
+                <a href='../shifter-bio' id="back-btn">&lt;-- Back to main site</a>
+                <h1>SHIFTER</h1>
+            </div>
+
+            <div class="controls">
+                <h2>Controls:</h2>
+                <ul>
+                    <li>Use arrow keys to move</li>
+                    <li>Press R to restart level</li>
+                </ul>
+            </div>
         </header>
-        <canvas width='512' height='512'>
-            <p>Failed to load canvas.</p>
-        </canvas>
+
+        <section class="main">
+            <canvas width='512' height='512'>
+                <p>Failed to load canvas.</p>
+            </canvas>
+        </section>
+
     </body>
 </html>
